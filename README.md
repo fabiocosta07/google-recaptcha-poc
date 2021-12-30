@@ -1,2 +1,1 @@
-# google-recaptcha-poc
-google-recaptcha-poc
+# poc-recaptcha

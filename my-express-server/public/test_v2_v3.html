@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>reCAPTCHA demo: Running both v2 and v3</title>
+    <!--sikekey v3-->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Ld3430cAAAAAB3PTgbh0wWv2Niw-x_QjZXuQZWu"></script>
+    <script>
+      function callV3() {
+        grecaptcha.ready(function() {
+          //sikekey v3
+          grecaptcha.execute('6Ld3430cAAAAAB3PTgbh0wWv2Niw-x_QjZXuQZWu', {action: 'submit'}).then(function(token) {
+            // Add your logic to submit to your backend server here.
+            const params = new URLSearchParams();
+            //secret v3
+            params.append('secret', '6Ld3430cAAAAACJQWZv3qJK-vYcoLpIgeCkSTLuM');
+            params.append('response', token);
+
+            fetch('http://localhost:3000/backend', {method: 'POST', body: params})
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.success) {
+                  //sikekey v2
+                  grecaptcha.render('test-element', {
+                      'sitekey' : '6LfP5n0cAAAAANR1cWpTn2k5d4gX3qM5cUqjh9Lt'
+                  });
+                }
+            })
+          });
+        });
+      }
+    </script>
+  </head>
+  <body onload="callV3()">
+    <form action="http://localhost:3000/backend_v2" method="POST">
+      <div id="test-element"></div>
+      <br>
+      <input type="submit" value="Submit">
+
+    </form>
+  </body>  
+</html>
