@@ -11,7 +11,7 @@
             // Add your logic to submit to your backend server here.
             const params = new URLSearchParams();
             //secret v3
-            params.append('secret', '6Ld3430cAAAAACJQWZv3qJK-vYcoLpIgeCkSTLuM');
+            params.append('secret', 'sitekey');
             params.append('response', token);
 
             fetch('http://localhost:3000/backend', {method: 'POST', body: params})
@@ -21,7 +21,7 @@
                 if (data.success) {
                   //sikekey v2
                   grecaptcha.render('test-element', {
-                      'sitekey' : '6LfP5n0cAAAAANR1cWpTn2k5d4gX3qM5cUqjh9Lt'
+                      'sitekey' : 'sitekey'
                   });
                 }
             })
